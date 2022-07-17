@@ -1,3 +1,3 @@
-import oneModule from "./modules/one";
+import timerModule from "./modules/timer";
 
-oneModule("19 july 2022");
+timerModule("19 july 2022");
