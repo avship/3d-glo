@@ -3,25 +3,28 @@ const menuModule = () => {
   const menu = document.querySelector("menu");
   const closeBtn = menu.querySelector(".close-btn");
   const menuItems = menu.querySelectorAll("ul>li>a");
-
+  const btnNext = document.querySelector("#nextSection");
   let idInterval;
 
-  const scrollToSection = (idHref) => {};
-  document.addEventListener("scroll", () => {
-    console.log(
-      document.querySelector("#service-block").getBoundingClientRect()
-    );
+  const scrollToElem = (elem) => {
+    document.querySelector(elem.getAttribute("href")).scrollIntoView({
+      block: "start",
+      behaviour: "smooth",
+      alignToTop: true,
+    });
+  };
+
+  btnNext.addEventListener("click", (event) => {
+    scrollToElem(event.target);
   });
+
   const openClose = (event) => {
     event.preventDefault();
     menu.classList.toggle("active-menu");
     if (event.path[0].tagName === "A") {
       scrollToSection(event.target.getAttribute("href"));
-      document.querySelector(event.target.getAttribute("href")).scrollIntoView({
-        block: "start",
-        behaviour: "smooth",
-        alignToTop: true,
-      });
+
+      scrollToElem(event.target);
     }
   };
 
