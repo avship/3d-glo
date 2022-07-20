@@ -5,26 +5,28 @@ const menuModule = () => {
   const menuItems = menu.querySelectorAll("ul>li>a");
   const btnNext = document.querySelector("#nextSection");
   let idInterval;
+  let section;
 
-  const scrollToElem = (elem) => {
-    document.querySelector(elem.getAttribute("href")).scrollIntoView({
+  const scrollToElem = () => {
+    section.scrollIntoView({
       block: "start",
-      behaviour: "smooth",
-      alignToTop: true,
+      behavior: "smooth",
     });
   };
 
   btnNext.addEventListener("click", (event) => {
-    scrollToElem(event.target);
+    section = event.target;
+
+    scrollToElem();
   });
 
   const openClose = (event) => {
     event.preventDefault();
     menu.classList.toggle("active-menu");
     if (event.path[0].tagName === "A") {
-      scrollToSection(event.target.getAttribute("href"));
-
-      scrollToElem(event.target);
+      const idSection = event.target.getAttribute("href");
+      section = document.querySelector(idSection);
+      scrollToElem();
     }
   };
 
