@@ -3,11 +3,9 @@ const menuModule = () => {
   const menu = document.querySelector("menu");
   const closeBtn = menu.querySelector(".close-btn");
   const menuItems = menu.querySelectorAll("ul>li>a");
-  const btnNext = document.querySelector("#nextSection");
-  let idInterval;
-  let section;
+  const btnNext = document.querySelector("#next_section");
 
-  const scrollToElem = () => {
+  const scrollToElem = (section) => {
     section.scrollIntoView({
       block: "start",
       behavior: "smooth",
@@ -15,9 +13,12 @@ const menuModule = () => {
   };
 
   btnNext.addEventListener("click", (event) => {
-    section = event.target;
+    event.preventDefault();
 
-    scrollToElem();
+    const sectionId = event.target.parentNode.getAttribute("href");
+    const section = document.querySelector(sectionId);
+    console.log(section);
+    scrollToElem(section);
   });
 
   const openClose = (event) => {
@@ -25,8 +26,8 @@ const menuModule = () => {
     menu.classList.toggle("active-menu");
     if (event.path[0].tagName === "A") {
       const idSection = event.target.getAttribute("href");
-      section = document.querySelector(idSection);
-      scrollToElem();
+      const section = document.querySelector(idSection);
+      scrollToElem(section);
     }
   };
 
